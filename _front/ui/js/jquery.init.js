@@ -40,6 +40,8 @@ jQuery(function($){
     */
 	_fwSlider();
 	_mobileMenu();
+	_mobilePortfoilo();
+	_portfolioMobileClick();
 });
 
 function _fwSlider(){
@@ -60,3 +62,33 @@ function _mobileMenu(){
 		$('.header-wrapper').toggleClass('active-mobile-menu');
 	});
 }
+
+function _mobilePortfoilo(){
+	if( $(window).innerWidth() > 767 ){
+		$('#portfolio-items').removeClass('mobile-portfolio');
+	} else {
+		$('#portfolio-items').addClass('mobile-portfolio');
+	}
+}
+
+function _portfolioMobileClick(){
+	$('#portfolio-items.mobile-portfolio > li').each(function(){
+		$('a',this).click(function(e){
+			e.preventDefault();
+			if( $(this).hasClass('active') ){
+				window.location.href = $(this).attr('href');
+			}else{
+				$(this).addClass('active');
+			}
+		});
+	});
+}
+
+$(window).resize(function(){
+	if( $(window).innerWidth() > 767 ){
+		$("#mobile-menu-wrapper").removeAttr("style");
+		$('.header-wrapper').removeClass('active-mobile-menu');
+		$('#toggle_menu_btn').removeClass('active');
+	}
+	_mobilePortfoilo();
+});
