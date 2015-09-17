@@ -38,11 +38,43 @@ jQuery(function($){
 		template: '<p>{text}</p><p class="tweetlink">{time}</p>' 
 	});
     */
+	_menuLine();
 	_fwSlider();
 	_mobileMenu();
 	_mobilePortfoilo();
 	_portfolioMobileClick();
 });
+
+function _menuLine(){
+	var $el, leftPos, newWidth,
+        $mainNav = $("#main-nav > ul");
+    
+    $mainNav.append("<li id='magic-line'></li>");
+    var $magicLine = $("#magic-line");
+    
+    $magicLine
+        .width($(".current_page_item").width())
+        .css("left", $(".current_page_item").position().left+10)
+        .data("origLeft", $magicLine.position().left)
+        .data("origWidth", $magicLine.width());
+        
+    $("#main-nav > ul > li a").hover(function() {
+        $el = $(this);
+        leftPos = $el.parent().position().left+10;
+		console.log(leftPos);
+        newWidth = $el.parent().width();
+        $magicLine.stop().animate({
+            left: leftPos,
+            width: newWidth
+        });
+    }, function() {
+        $magicLine.stop().animate({
+            left: $magicLine.data("origLeft"),
+            width: $magicLine.data("origWidth")
+        });    
+    });
+}
+
 
 function _fwSlider(){
 	$('#fw-slider').slick({
@@ -72,11 +104,11 @@ function _mobilePortfoilo(){
 }
 
 function _portfolioMobileClick(){
-	$('#portfolio-items.mobile-portfolio > li').each(function(){
-		$('a',this).click(function(e){
+	$('.portfolio-items-mobile > li').each(function(){
+		$('span',this).click(function(e){
 			e.preventDefault();
 			if( $(this).hasClass('active') ){
-				window.location.href = $(this).attr('href');
+				window.location.href = $(this).data('link');
 			}else{
 				$(this).addClass('active');
 			}
@@ -90,5 +122,4 @@ $(window).resize(function(){
 		$('.header-wrapper').removeClass('active-mobile-menu');
 		$('#toggle_menu_btn').removeClass('active');
 	}
-	_mobilePortfoilo();
 });
