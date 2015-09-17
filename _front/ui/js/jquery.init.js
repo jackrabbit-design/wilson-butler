@@ -39,7 +39,6 @@ jQuery(function($){
 	});
     */
 	_menuLine();
-	_fwSlider();
 	_mobileMenu();
 	_mobilePortfoilo();
 	_portfolioMobileClick();
@@ -75,17 +74,6 @@ function _menuLine(){
     });
 }
 
-
-function _fwSlider(){
-	$('#fw-slider').slick({
-	  dots: true,
-	  infinite: false,
-	  arrows:false,
-	  speed: 300,
-	  slidesToShow: 1,
-	  slidesToScroll: 1,
-	});
-}
 
 function _mobileMenu(){
 	$('#toggle_menu_btn').click(function(){
