@@ -43,7 +43,8 @@ jQuery(function($){
 	_portfolioMobileClick();
 	_hoverSpanClick();
 	_normalTabSelect();
-	 _portfolioFilter();
+	_portfolioFilter();
+	_teamPopup();
 });
 
 function _menuLine(){
@@ -130,10 +131,67 @@ function _portfolioFilter(){
 	$('#portfolio-all-items ul').mixItUp();
 }
 
+function _teamPopup(){
+	$(".members-group").colorbox({
+		inline:true, 
+		rel:'members-group',
+		href:$(this).attr('href'),
+		scrolling: false,
+		opacity:1,
+		width:100+"%",
+		transition:'none',
+		returnFocus:false,
+		onComplete:function() {
+			$('#cboxPrevious').text('').addClass('active');
+			$('#cboxNext').text('').addClass('active');
+			$('#cboxClose').text('').addClass('active');
+			
+			var boxId = $(this).attr('href');
+			var currentNumber = $(this).attr('data-id');
+			$('.team-main-wrapper',boxId).addClass('active');
+			_teamArr(currentNumber,boxId);
+		  },
+		  onCleanup: function() {
+			  //$("#colorbox").unwrap("<div id='colorbox_totalWrapper' />")
+		  },onLoad:function(){
+				$('.team-main-wrapper').removeClass('active');
+		  }
+	});
+}
+
+
+
+function _teamArr(currentNumber,boxId){
+	var currentNumber = currentNumber;
+	var membersLength = teamArr.length;
+	var x = parseInt(currentNumber); //get current array index currentID-1;	
+	//create html
+	//alert(boxId);	
+	var listItems	=	'<ul>';	
+	for(i=1; i <= 7; i++){
+		if( membersLength <= x ){
+			x = 0;
+		}
+		var y = parseInt(x+1);
+		//console.log(teamArr[x].acf_member_name);
+		listItems += '<li style=\'background-image:url('+teamArr[x].acf_member_sm_img+')\'><span><a href=\'#member'+y+'\' class="members-group" data-id=\''+y+'\' onClick="_teamPopup()"><h4>'+teamArr[x].acf_member_name+'</h4></a></span></li>';
+		x++;
+	}
+	listItems += '</ul>';
+	//$('.bottom-carousel')
+	$(boxId+' .bottom-carousel').append(listItems);
+	
+}
+
 $(window).resize(function(){
 	if( $(window).innerWidth() > 767 ){
 		$("#mobile-menu-wrapper").removeAttr("style");
 		$('.header-wrapper').removeClass('active-mobile-menu');
 		$('#toggle_menu_btn').removeClass('active');
 	}
+	
+	$.colorbox.resize({
+		maxWidth:"auto",
+		width:100+'%',
+	});
 });
