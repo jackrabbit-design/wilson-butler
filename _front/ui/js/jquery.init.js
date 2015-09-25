@@ -45,6 +45,7 @@ jQuery(function($){
 	_normalTabSelect();
 	_portfolioFilter();
 	_teamPopup();
+	_mapNav();
 });
 
 function _menuLine(){
@@ -183,11 +184,33 @@ function _teamArr(currentNumber,boxId){
 	
 }
 
+function _mapNav(){
+	$('.map-nav li a').each(function(){
+		$(this).hover(function(){
+				var getClass = $(this).attr('data-map');
+				$('.'+getClass).addClass('active');
+			},function(){
+				$('.map').removeClass('active');
+			}
+		);
+	});
+	
+	$('.map-nav li a').click(function(e){
+		e.preventDefault();
+		$('.map-nav li a').removeClass('active');
+		$(this).addClass('active');
+		$('.map').removeClass('mob-active');
+		var getClass = $(this).attr('data-map');
+		$('.'+getClass).addClass('mob-active');
+	});
+}
+
 $(window).resize(function(){
 	if( $(window).innerWidth() > 767 ){
 		$("#mobile-menu-wrapper").removeAttr("style");
 		$('.header-wrapper').removeClass('active-mobile-menu');
 		$('#toggle_menu_btn').removeClass('active');
+		$('.map').removeClass('mob-active');
 	}
 	
 	$.colorbox.resize({

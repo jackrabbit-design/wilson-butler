@@ -366,7 +366,7 @@
 
     form ul { margin: 0;
         li { background: none; list-style: none;
-            div { display: inline-block; vertical-align: top; }
+            div { display: inline-block; vertical-align: top; width: 100%; }
         }
     }
 
@@ -389,6 +389,62 @@
         &:hover {  }
     }
 
+    label{
+      display: block;
+      font-size: 16px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      line-height: 16px;
+      color: $themeBlue;
+    }
+
+    #contact-form-wrap{
+      input {
+        &[type=text], &[type=password], &[type=url], &[type=email] {
+          width: 100%;
+          height: 43px;
+          background-image: none;
+          border: 1px solid #ccc;
+          border-radius: 0;
+          @include box-sizing;
+          color: #565656;
+          font-size: 16px;
+          font-weight: 200;
+          padding: 8px 8px 8px 10px;
+          box-shadow: inset 0 3px 2px -2px rgba(0,0,0,0.1);
+          -webkit-box-shadow: inset 0 3px 2px -2px rgba(0,0,0,0.1);
+          -moz-box-shadow: inset 0 3px 2px -2px rgba(0,0,0,0.1);
+        }
+      }
+      textarea{
+        width: 100%;
+        height: 210px;
+        border: 1px solid #ccc;
+        border-radius: 0;
+        @include box-sizing;
+        color: #565656;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 8px 8px 8px 10px;
+        box-shadow: inset 0 3px 2px -2px rgba(0,0,0,0.1);
+        -webkit-box-shadow: inset 0 3px 2px -2px rgba(0,0,0,0.1);
+        -moz-box-shadow: inset 0 3px 2px -2px rgba(0,0,0,0.1);
+      }
+
+      .box{
+        width: 48%;
+      }
+      .form-footer{
+        width: 100%;
+        text-align: center;
+        margin: 30px 0 40px;
+      }
+      li{
+        vertical-align: top;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
 
 a{
     @include transition(all 0.1s ease-in-out);
@@ -400,6 +456,7 @@ a{
     display: inline-block;
     position: relative;
     font-weight: 700;
+    background: transparent;
     &.more{
         padding-right: 43px;
         min-height: 34px;
@@ -1126,6 +1183,57 @@ a{
     width: 47%;
   }
 }
+
+.video-player{
+  width: 100%;
+  position: relative;
+  @include cover-bg;
+
+  a{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    &:hover{
+      span{
+        background: rgba(245,130,32,0.85);
+      }
+    }
+    span{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      @include border-radius(100px);
+      background: rgba(0,84,166,0.85);
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      @include transition(all 0.2s ease-in-out);
+      &:before{
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 22px 0 22px 34px;
+        border-color: transparent transparent transparent #ffffff;
+        position: absolute;
+        content: '';
+        left: 50%;
+        top: 50%;
+        margin-top: -22px;
+        margin-left: -10px;
+      }
+    }
+  }
+
+  img{
+    margin-bottom: 0;
+  }
+}
+
 
 .news-content{
   .main-left , .main-right{
@@ -2094,6 +2202,127 @@ ul.all-post{
   }
 }
 
+/*Contact Page*/
+#map-wrapper{
+  position: relative;
+  width: 100%;
+  img{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .map-body{
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .map{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    @include transition(all 0.2s ease-in-out);
+
+    &.active{
+      visibility: visible;
+      opacity: 1;
+    }
+    &.mob-active{
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+.map-nav-wrap{
+  position: absolute;
+  display: inline-block;
+  bottom: 20px;
+  right: 20px;
+
+  .inner-wrap{
+    position: relative;
+    display: inline-block;
+    padding-right: 58px;
+    overflow: hidden;
+    border-top: 2px solid #fff;
+    z-index: 2;
+
+    &:before{
+      width:56px;
+      border-right:2px solid #fff;
+      height: 100%;
+      content: '';
+      background-color: rgba(0, 84, 166, 0.85);
+      bottom: 58px;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+
+  .corner{
+    width: 58px;
+    height: 58px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: url(../images/map-nav-corner.png)left top no-repeat;
+  }
+  ul{
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    display: inline-block;
+    padding: 25px 45px 25px 25px;
+    background-color: rgba(0, 84, 166, 0.85);
+
+    li{
+      display: block;
+      a{
+        display: block;
+        padding: 4px 0;
+        font-size: 18px;
+        font-weight: 200;
+        color: #fff;
+        line-height: 18px;
+
+        &:hover{
+          color:$themeOrange;
+        }
+      }
+    }
+  }
+}
+
+.contact-address{
+  text-align: center;
+  margin: 40px 0;
+  p ,span,a{
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 200;
+    color: #565656;
+  }
+  a{
+    color: $themeOrange;
+    margin-left: 35px;
+    &:hover{
+      color:$themeBlue;
+    }
+  }
+  span{
+    margin-left: 35px;
+  }
+}
+
+
+
+
+
 /* --------------------------- Color box -----------*/
 #colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0 !important; left:0; z-index:9999; overflow:hidden;}
 #cboxWrapper {max-width:none;}
@@ -2870,6 +3099,39 @@ ul.all-post{
       }
     }
   }
+
+  .map-nav-wrap{
+    width: 100%;
+    display: block;
+    position: relative;
+    right: auto;
+    bottom: auto;
+
+    .inner-wrap{
+      @include box-sizing;
+      width: 100%;
+    }
+
+    ul{
+      @include box-sizing;
+      width: 100%;
+    }
+  }
+
+  #map-wrapper{
+    .map.mob-active{
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .contact-address{
+    margin: 30px 0;
+    p , span,a{
+      display: block;
+      margin-left: 0;
+    }
+  }
 }/*768*/
 
 
@@ -2983,6 +3245,16 @@ ul.all-post{
       height: 150px;
     }
   }
+
+  #contact-form-wrap{
+    .box{
+      width: 100%;
+    }
+
+    .form-footer{
+      margin-top: 10px;
+    }
+  }
 }/*680*/
 
 @media screen and (max-width: 580px) {
@@ -3062,6 +3334,23 @@ ul.all-post{
         display: block;
         &:first-child{
           margin-top:0;
+        }
+      }
+    }
+  }
+
+  .video-player{
+    a{
+      span{
+        width: 60px;
+        height: 60px;
+        @include border-radius(60px);
+        margin-top: -30px;
+        margin-left: -30px;
+        &:before{
+          border-width: 17px 0 17px 24px;
+          margin-top: -17px;
+          margin-left: -6px;
         }
       }
     }
