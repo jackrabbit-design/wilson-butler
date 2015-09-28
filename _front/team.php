@@ -867,6 +867,14 @@
      </footer> 
 
     <script src="ui/js/jquery.plugins.js" type="text/javascript"></script>
-    <script src="ui/js/jquery.init.js" type="text/javascript"></script>    
+    <script src="ui/js/jquery.init.js" type="text/javascript"></script> 
+    <script type="text/javascript">
+    	$(window).resize(function(){			
+			$(".members-group").colorbox.resize({
+				maxWidth:"auto",
+				width:100+'%',
+			});
+		});
+    </script>   
 </body>
 </html>

@@ -46,6 +46,7 @@ jQuery(function($){
 	_portfolioFilter();
 	_teamPopup();
 	_mapNav();
+	_videoPopup();
 });
 
 function _menuLine(){
@@ -205,6 +206,20 @@ function _mapNav(){
 	});
 }
 
+
+function _videoPopup(){
+	$(".video-popup").colorbox({
+		inline:true, 
+		width:95+"%",
+		maxWidth:768+"px",
+		scrolling: false,
+		className: 'video-main-wrapper',
+		onComplete:function() {
+			$('#cboxClose').text('').addClass('active');
+		  }		
+	});
+}
+
 $(window).resize(function(){
 	if( $(window).innerWidth() > 767 ){
 		$("#mobile-menu-wrapper").removeAttr("style");
@@ -212,9 +227,4 @@ $(window).resize(function(){
 		$('#toggle_menu_btn').removeClass('active');
 		$('.map').removeClass('mob-active');
 	}
-	
-	$.colorbox.resize({
-		maxWidth:"auto",
-		width:100+'%',
-	});
 });
