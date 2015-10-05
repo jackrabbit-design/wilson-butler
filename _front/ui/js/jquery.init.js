@@ -195,15 +195,6 @@ function _mapNav(){
 			}
 		);
 	});
-	
-	$('.map-nav li a').click(function(e){
-		e.preventDefault();
-		$('.map-nav li a').removeClass('active');
-		$(this).addClass('active');
-		$('.map').removeClass('mob-active');
-		var getClass = $(this).attr('data-map');
-		$('.'+getClass).addClass('mob-active');
-	});
 }
 
 

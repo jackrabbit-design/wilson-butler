@@ -599,6 +599,27 @@ a{
         right: 0;
         bottom: 0;
         width: 100%;
+
+        a{
+          display: inline-block;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+
+          &:hover{
+            h2{
+              color:$themeOrange;
+            }
+
+            .banner-corner{
+              &:before{
+                border: 42px solid $themeBlue;
+                border-bottom: 42px solid transparent; 
+                border-right: 42px solid transparent; 
+              }
+            }
+          }
+        }
         h2{
             color: #fff;
             display: inline-block;
@@ -607,15 +628,10 @@ a{
             line-height: 17px;
             font-size: 17px;
             margin-top: 30px;
-
-            a{
-              color: #fff;
-              &:hover{
-                color:$themeOrange;
-              }
-            }
         }
     }
+
+
     .banner-corner{
       width: 84px;
       height: 84px;
@@ -758,16 +774,6 @@ a{
             background-color: rgba(0, 84, 166, 0.85);
             border-right: 2px solid white;
         }
-
-        &:after{
-            width: 86px;
-            height: 86px;
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: -86px;
-            background: url(../images/fw-slider-content-bg.png)right bottom no-repeat;
-        }
     }
 
     .top-box{
@@ -817,8 +823,33 @@ a{
 
     .read-more-wrap{
         position: absolute;
-        right: 28px;
-        bottom: 32px;
+        right: -86px;
+        bottom: 0;
+        overflow: hidden;
+        a{
+          position: relative;
+          display: inline-block;
+          float: right;
+          padding-right: 114px;
+          height: 86px;
+          line-height: 86px;
+
+          &:hover{
+            &:before{
+              background-position:right bottom;
+            }
+          }
+          &:before{
+            width: 86px;
+            height: 86px;
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: url(../images/news-slider-bg.png)right top no-repeat;
+            background-size: 86px auto;
+          }
+        }
     }
 }
 
@@ -2140,6 +2171,7 @@ ul.all-post{
     padding: 2px;
     @include box-sizing;
     margin-bottom: 20px;
+    overflow: hidden;
     ul{
       font-size: 0;
       margin-left: -0.2%;
@@ -2206,26 +2238,33 @@ ul.all-post{
 #map-wrapper{
   position: relative;
   width: 100%;
-  img{
-    width: 100%;
-    height: auto;
-    display: block;
-  }
 
   .map-body{
     width: 100%;
-    height: auto;
+    height: 660px;
     position: relative;
+  }
+
+  .def-map{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include cover-bg;
+    z-index: 2;
   }
   .map{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     opacity: 0;
     visibility: hidden;
     @include transition(all 0.2s ease-in-out);
+    @include cover-bg;
+    z-index: 4;
 
     &.active{
       visibility: visible;
@@ -2243,7 +2282,7 @@ ul.all-post{
   display: inline-block;
   bottom: 20px;
   right: 20px;
-
+  z-index: 10;
   .inner-wrap{
     position: relative;
     display: inline-block;
@@ -2545,6 +2584,12 @@ ul.all-post{
       height: 250px;
     }
   }
+
+  #map-wrapper{
+    .map-body{
+    height: 550px;
+    }
+  }
 }/*1110*/
 
 @media screen and (max-width: 980px) {
@@ -2572,6 +2617,12 @@ ul.all-post{
             } 
         }
     }
+
+  #map-wrapper{
+    .map-body{
+      height: 500px;
+    }
+  }
 }/*980*/
 
 
@@ -2800,12 +2851,22 @@ ul.all-post{
         }
 
         .banner-text{
+            a{
+              &:hover{
+                .banner-corner{
+                  &:before{
+                    border: 14px solid $themeBlue;
+                    border-bottom: 14px solid transparent; 
+                    border-right: 14px solid transparent; 
+                  }
+                }
+              }
+            }
             h2{
                 font-size: 13px;
                 margin-top: 5px;
             }
         }
-
         .banner-corner{
           width: 28px;
           height: 28px;
@@ -2881,8 +2942,19 @@ ul.all-post{
             margin-bottom: 20px;
         }
         .read-more-wrap{
-            bottom: 5px;
-            right: 45px;
+            right: 0;
+            bottom: -2px;
+            a{
+              height: 28px;
+              line-height: 28px;
+              padding-right: 46px;
+              &:before{
+                width:28px;
+                height: 28px;
+                background-size: 28px auto;
+                background-color: #fff;
+              }
+            }
         }
     }
 
@@ -3168,6 +3240,12 @@ ul.all-post{
       margin-left: 0;
     }
   }
+
+  #map-wrapper{
+    .map-body{
+      height: 400px;
+    }
+  }
 }/*768*/
 
 
@@ -3389,6 +3467,12 @@ ul.all-post{
           margin-left: -6px;
         }
       }
+    }
+  }
+
+  #map-wrapper{
+    .map-body{
+      height: 300px;
     }
   }
 }/*480*/
