@@ -257,7 +257,12 @@
 /* !STYLES */
 /* ========================================================================= */
 
-	html, body { font-family: 'Meta'; font-weight: 400; }
+	html, body { 
+    font-family: 'Meta'; font-weight: 400; 
+    &.prevent-scroll{
+      overflow: hidden;
+    } 
+  }
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
 
@@ -2009,12 +2014,25 @@ ul.all-post{
   }
 }
 
+
+/*------------- NEW ----------------*/
+
+/*.test{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  background: #fff;
+}*/
+
 /*team popup*/
 .team-main-wrapper{
   width: 100%;
-  min-height: 100%;
-
-
+  height: 100vh ; height /*\**/: 600px\9;
+  position: relative;
+  padding-bottom: 165px;
+  @include box-sizing;
   &.active{
     .photo{
       opacity: 1;
@@ -2026,24 +2044,30 @@ ul.all-post{
         visibility: visible;
       }
     }
-    
   }
   .member-detail-wrapper{
     position: relative;
+    height: 100%;
+    width: 100%;
   }
   .inner-wrap{
-    display: table;
+    display: block;
     width: 100%;
+    height: 100%;
     position: relative;
   }
   .mobile-member-pic{
     display: none;
   }
   .member-photo-wrap{
+    height: 100%;
+    position: absolute;
     width: 50%;
-    display: table-cell;
-    position: relative;
+    display: block;
+    float: right;
     overflow: hidden;
+    top: 0;
+    right: 0;
   }
   .photo{
       position: absolute;
@@ -2059,7 +2083,13 @@ ul.all-post{
     }
   .left-box{
     width: 50%;
-    display: table-cell;
+    display: block;
+    float: left;
+    max-height: 100%;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .left-inner{
     float: right;
@@ -2067,7 +2097,6 @@ ul.all-post{
     max-width: 555px;
     @include box-sizing;
     padding: 70px 40px 20px 40px;
-    min-height: 500px;
     h3{
       margin-bottom: 8px;
       display: block;
@@ -2166,20 +2195,22 @@ ul.all-post{
   }
 
   .bottom-carousel{
+    position: absolute;
+    left: 0;
+    bottom: 1px;
     width: 100%;
     height: 163px;
     padding: 2px;
     @include box-sizing;
-    margin-bottom: 20px;
     overflow: hidden;
     ul{
       font-size: 0;
-      margin-left: -0.2%;
+      margin-left: -0.28571428571429%;
       text-align: center;
       li{
         width: 14%;
         height: 163px;
-        margin-left: 0.2%;
+        margin-left: 0.28571428571429%;
         display: inline-block;
         position: relative;
         @include cover-bg;
@@ -2233,6 +2264,124 @@ ul.all-post{
     }
   }
 }
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainer
+{
+  overflow: hidden;
+  position: relative;
+}
+
+.jspPane
+{
+  position: absolute;
+}
+
+.jspVerticalBar
+{
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  width: 6px;
+  height: 100%;
+}
+
+.jspHorizontalBar
+{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: red;
+}
+
+.jspCap
+{
+  display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+  float: left;
+}
+
+.jspTrack
+{
+  background: #dde;
+  position: relative;
+}
+
+.jspDrag
+{
+  background: $themeBlue;
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  @include border-radius(2px);
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+  float: left;
+  height: 100%;
+}
+
+.jspArrow
+{
+  background: #50506d;
+  text-indent: -20000px;
+  display: block;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.jspArrow.jspDisabled
+{
+  cursor: default;
+  background: #80808d;
+}
+
+.jspVerticalBar .jspArrow
+{
+  height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+  width: 16px;
+  float: left;
+  height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+  outline: none;
+}
+
+.jspCorner
+{
+  background: #eeeef4;
+  float: left;
+  height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+  margin: 0 -3px 0 0;
+}
+
+/*------------- NEW ----------------*/
 
 /*Contact Page*/
 #map-wrapper{
@@ -2410,6 +2559,7 @@ ul.all-post{
 
   &.active{
     display: block;
+    background: #fff; /* NEW */
   }
   &:before{
     font-family: "wilson-bulter" !important;
@@ -2562,12 +2712,14 @@ ul.all-post{
         width: 24.8%;
       }
     }
-  /*team popup*/
+  /*team popup NEW*/
   .team-main-wrapper{
     .bottom-carousel{
       ul{
+        margin-left: 0.2%;
         li{
           width: 19.8%;
+          margin-left: 0.2%;
           &:nth-child(6n){
             display:none;
             ~li{
@@ -3248,15 +3400,22 @@ ul.all-post{
   }
 }/*768*/
 
-
+/*------------- NEW ----------------*/
 @media screen and (max-width: 700px){
+  html, body { 
+    &.prevent-scroll{
+      overflow: auto;
+    } 
+  }
   .team-main-wrapper{
+    height: auto;
     .inner-wrap{
       display: block;
     }
     .left-box{
       width: 100%;
       display: block;
+      position: relative;
       img{
         display: block;
         width: 100%;

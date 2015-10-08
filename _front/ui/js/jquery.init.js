@@ -47,6 +47,7 @@ jQuery(function($){
 	_teamPopup();
 	_mapNav();
 	_videoPopup();
+	
 });
 
 function _menuLine(){
@@ -134,6 +135,7 @@ function _portfolioFilter(){
 }
 
 function _teamPopup(){
+	var wh	= $('body').width();
 	$(".members-group").colorbox({
 		inline:true, 
 		rel:'members-group',
@@ -151,7 +153,10 @@ function _teamPopup(){
 			var boxId = $(this).attr('href');
 			var currentNumber = $(this).attr('data-id');
 			$('.team-main-wrapper',boxId).addClass('active');
+			_customScroll(boxId);
 			_teamArr(currentNumber,boxId);
+			$('body').addClass('prevent-scroll');
+			_fullWidth();
 		  },
 		  onCleanup: function() {
 			  //$("#colorbox").unwrap("<div id='colorbox_totalWrapper' />")
@@ -161,7 +166,19 @@ function _teamPopup(){
 	});
 }
 
+function _customScroll(boxId){
+	var scrollBox = $(boxId+" .team-main-wrapper .left-box").jScrollPane(); 
+	var api = scrollBox.data('jsp');
+	api.destroy();
+	$(boxId+" .team-main-wrapper .left-box").jScrollPane({autoReinitialise: true});
+}
 
+function _fullWidth(){
+	$(".members-group").colorbox.resize({
+		maxWidth:"auto",
+		width:100+'%',
+	});
+}
 
 function _teamArr(currentNumber,boxId){
 	var currentNumber = currentNumber;
@@ -217,5 +234,13 @@ $(window).resize(function(){
 		$('.header-wrapper').removeClass('active-mobile-menu');
 		$('#toggle_menu_btn').removeClass('active');
 		$('.map').removeClass('mob-active');
+	}
+	
+	if( $(window).innerWidth() <= 700 ){
+		var element = $('#colorbox .team-main-wrapper .left-box').jScrollPane(); 
+		var api = element.data('jsp');
+		api.destroy();
+	} else{
+		$('#colorbox .team-main-wrapper .left-box').jScrollPane();
 	}
 });
